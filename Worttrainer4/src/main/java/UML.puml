@@ -3,17 +3,39 @@
 
 
 class Main {
+    -<linkedList>WordPair:
+    -numAskeskedQ:int
+    -correctQ:int
+
     + main() : void
+    +save(): void
+    +load(): void
+    +check(): boolean
+    +stats(): String
 }
 
 class WordPair {
-    - wordUrlPair: <>Hashmap
+    - word
+    - url
+    +WordPair(word: String,url:String)
+    +checkURL(): boolean
+    + toString():String
+
 
 }
-class GUI {
+
+class Gui {
+    + drawGUI()
 
 }
 
-Main --> WordPair: uses
+file file{
+
+}
+
+Main --> WordPair: uses 1..*
+Main --> Gui
+Main <--> file: saves Stats
+
 
 @enduml
