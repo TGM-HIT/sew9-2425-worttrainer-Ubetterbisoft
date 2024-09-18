@@ -6,7 +6,7 @@ class Main{
 }
 class WordTrainer {
     -<linkedList>WordPair:
-    -numAskeskedQ:int
+    -numAsked:int
     -correctQ:int
 
 
@@ -20,6 +20,7 @@ class WordPair {
     - word
     - url
     +WordPair(word: String,url:String)
+    +WordPair()
     +checkURL(): boolean
     + toString():String
 
