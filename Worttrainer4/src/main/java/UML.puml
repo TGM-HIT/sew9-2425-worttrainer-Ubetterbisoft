@@ -1,13 +1,15 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-
-class Main {
+class Main{
+    +main(String[]args):void
+}
+class WordTrainer {
     -<linkedList>WordPair:
     -numAskeskedQ:int
     -correctQ:int
 
-    + main() : void
+
     +save(): void
     +load(): void
     +check(): boolean
@@ -33,9 +35,10 @@ file file{
 
 }
 
-Main --> WordPair: uses 1..*
-Main --> Gui
-Main <--> file: saves Stats
+WordTrainer --> WordPair: uses 1..*
+WordTrainer --> Gui:1..1
+WordTrainer <--> file:1..1
+Main -->WordTrainer: 1..*
 
 
 @enduml
