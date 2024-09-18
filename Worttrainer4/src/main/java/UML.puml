@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+class Main {
+    + main() : void
+}
+
+class WordPair {
+    - wordUrlPair: <>Hashmap
+
+}
+class GUI {
+
+}
+
+Main --> WordPair: uses
+
+@enduml
