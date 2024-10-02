@@ -10,8 +10,7 @@ class WordTrainer {
     -correctQ:int
 
 
-    +save(): void
-    +load(): void
+
     +check(): boolean
     +stats(): String
 }
@@ -31,15 +30,25 @@ class Gui {
     + drawGUI()
 
 }
+interface PersistanceStrategy{
+    +save(): void
+    +load(): void
+}
+class SaveJson{
+    +save(): void
+    +load(): void
+}
 
 file file{
 
 }
 
-WordTrainer --> WordPair: uses 1..*
-WordTrainer --> Gui:1..1
-WordTrainer <--> file:1..1
-Main -->WordTrainer: 1..*
+WordTrainer o-- WordPair: uses 1..*
+Gui --> WordTrainer
+Gui o--> PersistanceStrategy
+SaveJson <--> file:1..1
+Main --> Gui: 1
+SaveJson ..|> PersistanceStrategy
 
 
 @enduml
