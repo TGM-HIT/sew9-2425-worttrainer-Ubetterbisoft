@@ -3,6 +3,23 @@ import java.net.URL;
 
 public class WordPair {
     private String word;
+
+    public String getWord() {
+        return word;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     private String url;
 
     public WordPair(String word,String url){

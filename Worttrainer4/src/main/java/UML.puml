@@ -22,12 +22,15 @@ class WordPair {
     +WordPair()
     +checkURL(): boolean
     + toString():String
+    + getWord(): String
+    + getUrl(): String
 
 
 }
 
 class Gui {
     + Gui()
+    + displayImage(): void
 
 
 }
