@@ -27,8 +27,11 @@ class WordPair {
 }
 
 class Gui {
-    + drawGUI()
+    + Gui()
 
+
+}
+class JFrame{
 }
 interface PersistanceStrategy{
     +save(): void
@@ -49,6 +52,7 @@ Gui o--> PersistanceStrategy
 SaveJson <--> file:1..1
 Main --> Gui: 1
 SaveJson ..|> PersistanceStrategy
+Gui --|> JFrame
 
 
 @enduml

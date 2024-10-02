@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.LinkedList;
 public class Test {
     public static void main(String[]args){
@@ -7,5 +8,13 @@ public class Test {
         WordPair affe = new WordPair("affe","https://th.bing.com/th/id/OIP.CzLbCJ3jBeiNRJ1hPyeG2gHaHP?w=186&h=182&c=7&r=0&o=5&pid=1");
 
         System.out.println(affe.checkURL());
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new Gui().setVisible(true);
+            }
+        });
+
+
     }
 }
