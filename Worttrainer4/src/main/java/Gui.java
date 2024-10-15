@@ -19,14 +19,20 @@ public class Gui extends JFrame {
 
 
     public Gui() {
-
+        /**
+         * Initialisiert die GUI notwendigen komoponents
+         */
         setTitle("Worttrainer für Volksschueler");
         setSize(700, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-
+/**
+ * Speicherstrategie wird festgelegt
+ * */
         PersistanceStrategy persistanceStrategy = new SaveJson();
+        //Falls keine Daten vorhanden sind, wird ein neuer WordTrainer erstellt,
+        // ansonsten wird der WordTrainer geladen
         WordTrainer wordTrainer = persistanceStrategy.load();
 
 
@@ -58,6 +64,7 @@ public class Gui extends JFrame {
         save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Speichern des WordTrainers
                 persistanceStrategy.save(wordTrainer);
 
             }
@@ -67,23 +74,28 @@ public class Gui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String description = descriptionField.getText();
                 if(description.equals("")){
-
+                    //Programm wird bei leerer Eingabe beendet
                     System.exit(0);
                 }
+                //Zwischenvariablen für die Anzahl der richtigen und falschen Versuche um den INdex zu ermitteln
                 int correctCount = wordTrainer.getCorrectCount();
                 int falseCount = wordTrainer.getFalseCount();
 
                 String correctDescription = wordTrainer.getList().get(correctCount).getWord(); // Angenommene Methode für die richtige Beschreibung
 
-
+                /**
+                 * Überprüfung des INhalts des Textfeldes
+                 */
                 if (description.equalsIgnoreCase(correctDescription)) {
 
                     resultLabel.setText("Richtig!");
                     wordTrainer.setCorrectCount(wordTrainer.getCorrectCount()+1);
                     correctCount++;
                     if (correctCount < wordTrainer.getList().size()) {
+                        // Nächstes Bild anzeigen
                         displayImage(wordTrainer);
                     } else {
+                        // Alle Bilder wurden durchlaufen
                         resultLabel.setText("Keine weiteren Bilder.");
 
                     }
@@ -96,11 +108,13 @@ public class Gui extends JFrame {
 
                 wordTrainer.setAttempts(wordTrainer.getFalseCount()+wordTrainer.getCorrectCount());
 
+                //Informationen werden an die Labels übergeben zum rendern
+
                 totalAttemptsLabel.setText("Gesamtversuche: " + (wordTrainer.getFalseCount()+wordTrainer.getCorrectCount()));
                 correctCounterLabel.setText("Korrekte Beschreibungen: " + wordTrainer.getCorrectCount());
                 falseAttemptsLabel.setText("Falsche Versuche: " + wordTrainer.getFalseCount());
 
-                // Nächstes Bild anzeigen
+
 
 
 

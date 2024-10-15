@@ -6,8 +6,16 @@ class Main{
 }
 class WordTrainer {
     -<linkedList>WordPair:
+    -correctCount
+    -attempts
+    -falseCount
 
-    +check(): boolean
+    + setCorrectCount(): void
+        + setFalseCount(): void
+        + getCorrectCount(): int
+        + getFalseCount(): int
+        + getAttempts(): int
+        + setAttempts(): void
 }
 
 class WordPair {
@@ -16,17 +24,15 @@ class WordPair {
     +WordPair(word: String,url:String)
     +WordPair()
     +checkURL(): boolean
-    + toString():String
     + getWord(): String
     + getUrl(): String
+
 
 
 }
 
 class Gui {
-    -correctCount
-    -attempts
-    -falseCount
+
     + Gui()
     + displayImage(): void
 
@@ -35,12 +41,12 @@ class Gui {
 class JFrame{
 }
 interface PersistanceStrategy{
-    +save(): void
-    +load(): void
+    +save(WordTrainer wordTrainer): void
+    +load(): WordTrainer
 }
 class SaveJson{
-    +save(): void
-    +load(): void
+    +save(WordTrainer wordTrainer): void
+    +load(): WordTrainer
 }
 
 file file{
