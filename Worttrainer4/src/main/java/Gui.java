@@ -13,9 +13,6 @@ public class Gui extends JFrame {
     private JLabel correctCounterLabel;
     private JLabel totalAttemptsLabel;
     private JLabel falseAttemptsLabel;
-    private int attempts;
-    private int correctCount;
-    private int falseCount;
 
     public Gui() {
 
@@ -56,11 +53,16 @@ public class Gui extends JFrame {
                 if(description.equals("")){
                     System.exit(0);
                 }
+                int correctCount = wordTrainer.getCorrectCount();
+                int falseCount = wordTrainer.getFalseCount();
+
                 String correctDescription = wordTrainer.getList().get(correctCount).getWord(); // Angenommene Methode für die richtige Beschreibung
+
 
                 if (description.equalsIgnoreCase(correctDescription)) {
 
                     resultLabel.setText("Richtig!");
+                    wordTrainer.setCorrectCount(wordTrainer.getCorrectCount()+1);
                     correctCount++;
                     if (correctCount < wordTrainer.getList().size()) {
                         displayImage(wordTrainer);
@@ -71,13 +73,15 @@ public class Gui extends JFrame {
 
                 } else {
                     resultLabel.setText("Falsch, versuche es erneut.");
-                    falseCount++;
+                    wordTrainer.setFalseCount(wordTrainer.getFalseCount()+1);
+
                 }
 
-                attempts++;
-                totalAttemptsLabel.setText("Gesamtversuche: " + (correctCount + falseCount));
-                correctCounterLabel.setText("Korrekte Beschreibungen: " + correctCount);
-                falseAttemptsLabel.setText("Falsche Versuche: " + falseCount);
+                wordTrainer.setAttempts(wordTrainer.getFalseCount()+wordTrainer.getCorrectCount());
+
+                totalAttemptsLabel.setText("Gesamtversuche: " + (wordTrainer.getFalseCount()+wordTrainer.getCorrectCount()));
+                correctCounterLabel.setText("Korrekte Beschreibungen: " + wordTrainer.getCorrectCount());
+                falseAttemptsLabel.setText("Falsche Versuche: " + wordTrainer.getFalseCount());
 
                 // Nächstes Bild anzeigen
 
@@ -96,7 +100,10 @@ public class Gui extends JFrame {
             if (imageLabel != null) {
                 remove(imageLabel);
             }
+            int correctCount = wordTrainer.getCorrectCount();
+
             URL url = new URL(wordTrainer.getList().get(correctCount).getUrl());
+
             Image image = ImageIO.read(url);
             imageLabel = new JLabel(new ImageIcon(image));
             add(imageLabel, BorderLayout.CENTER);

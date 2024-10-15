@@ -7,6 +7,33 @@ public class WordTrainer {
     private int numAskedQ;
     private int correctQ;
 
+    public int getAttempts() {
+        return attempts;
+    }
+
+    public void setAttempts(int attempts) {
+        this.attempts = attempts;
+    }
+
+    public int getCorrectCount() {
+        return correctCount;
+    }
+
+    public void setCorrectCount(int correctCount) {
+        this.correctCount = correctCount;
+    }
+
+    public int getFalseCount() {
+        return falseCount;
+    }
+
+    public void setFalseCount(int falseCount) {
+        this.falseCount = falseCount;
+    }
+
+    private int attempts;
+    private int correctCount;
+    private int falseCount;
 
     WordTrainer(){
         numAskedQ = 0;
@@ -19,6 +46,9 @@ public class WordTrainer {
         this.list.add(new WordPair("Katze", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/320px-Cat03.jpg"));
         this.list.add(new WordPair("Apfel", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/320px-Red_Apple.jpg"));
 
+        this.attempts = 0;
+        this.correctCount= 0;
+        this.falseCount= 0;
 
 
 
