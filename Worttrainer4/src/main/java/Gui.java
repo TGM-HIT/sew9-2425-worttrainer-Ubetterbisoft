@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -14,6 +15,9 @@ public class Gui extends JFrame {
     private JLabel totalAttemptsLabel;
     private JLabel falseAttemptsLabel;
 
+    private JButton save;
+
+
     public Gui() {
 
         setTitle("Worttrainer für Volksschueler");
@@ -21,7 +25,10 @@ public class Gui extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        WordTrainer wordTrainer = new WordTrainer();
+
+        PersistanceStrategy persistanceStrategy = new SaveJson();
+        WordTrainer wordTrainer = persistanceStrategy.load();
+
 
         // Zeigt das erste Bild an
         displayImage(wordTrainer);
@@ -35,9 +42,9 @@ public class Gui extends JFrame {
         add(resultLabel, BorderLayout.SOUTH);
 
         // Counter Labels
-        correctCounterLabel = new JLabel("Korrekte Beschreibungen: 0");
-        totalAttemptsLabel = new JLabel("Gesamtversuche: 0");
-        falseAttemptsLabel = new JLabel("Falsche Versuche: 0");
+        correctCounterLabel = new JLabel("Korrekte Beschreibungen: "+wordTrainer.getCorrectCount());
+        totalAttemptsLabel = new JLabel("Gesamtversuche: "+wordTrainer.getAttempts());
+        falseAttemptsLabel = new JLabel("Falsche Versuche: "+wordTrainer.getFalseCount());
         JPanel counterPanel = new JPanel();
         counterPanel.setLayout(new GridLayout(3, 1));
         counterPanel.add(correctCounterLabel);
@@ -46,11 +53,21 @@ public class Gui extends JFrame {
         add(counterPanel, BorderLayout.EAST);
 
         // Action Listener für das Textfeld
+        save = new JButton("Save");
+        add(save, BorderLayout.SOUTH);
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                persistanceStrategy.save(wordTrainer);
+
+            }
+        });
         descriptionField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String description = descriptionField.getText();
                 if(description.equals("")){
+
                     System.exit(0);
                 }
                 int correctCount = wordTrainer.getCorrectCount();
