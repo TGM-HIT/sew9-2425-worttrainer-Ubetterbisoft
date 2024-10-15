@@ -6,13 +6,8 @@ class Main{
 }
 class WordTrainer {
     -<linkedList>WordPair:
-    -numAsked:int
-    -correctQ:int
-
-
 
     +check(): boolean
-    +stats(): String
 }
 
 class WordPair {
@@ -29,6 +24,9 @@ class WordPair {
 }
 
 class Gui {
+    -correctCount
+    -attempts
+    -falseCount
     + Gui()
     + displayImage(): void
 

@@ -18,9 +18,7 @@ public class Gui extends JFrame {
     private int falseCount;
 
     public Gui() {
-        this.attempts = 0;
-        this.correctCount = 0;
-        this.falseCount = 0;
+
         setTitle("Worttrainer für Volksschueler");
         setSize(700, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,11 +53,22 @@ public class Gui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String description = descriptionField.getText();
-                String correctDescription = wordTrainer.getList().get(attempts).getWord(); // Angenommene Methode für die richtige Beschreibung
+                if(description.equals("")){
+                    System.exit(0);
+                }
+                String correctDescription = wordTrainer.getList().get(correctCount).getWord(); // Angenommene Methode für die richtige Beschreibung
 
                 if (description.equalsIgnoreCase(correctDescription)) {
+
                     resultLabel.setText("Richtig!");
                     correctCount++;
+                    if (correctCount < wordTrainer.getList().size()) {
+                        displayImage(wordTrainer);
+                    } else {
+                        resultLabel.setText("Keine weiteren Bilder.");
+
+                    }
+
                 } else {
                     resultLabel.setText("Falsch, versuche es erneut.");
                     falseCount++;
@@ -71,11 +80,9 @@ public class Gui extends JFrame {
                 falseAttemptsLabel.setText("Falsche Versuche: " + falseCount);
 
                 // Nächstes Bild anzeigen
-                if (attempts < wordTrainer.getList().size()) {
-                    displayImage(wordTrainer);
-                } else {
-                    resultLabel.setText("Keine weiteren Bilder.");
-                }
+
+
+
 
                 descriptionField.setText("");
             }
@@ -89,7 +96,7 @@ public class Gui extends JFrame {
             if (imageLabel != null) {
                 remove(imageLabel);
             }
-            URL url = new URL(wordTrainer.getList().get(attempts).getUrl());
+            URL url = new URL(wordTrainer.getList().get(correctCount).getUrl());
             Image image = ImageIO.read(url);
             imageLabel = new JLabel(new ImageIcon(image));
             add(imageLabel, BorderLayout.CENTER);
