@@ -18,6 +18,7 @@ public class Gui extends JFrame {
     private JButton save;
 
 
+
     public Gui() {
         /**
          * Initialisiert die GUI notwendigen komoponents
@@ -78,10 +79,16 @@ public class Gui extends JFrame {
                     System.exit(0);
                 }
                 //Zwischenvariablen für die Anzahl der richtigen und falschen Versuche um den INdex zu ermitteln
+                String correctDescription;
                 int correctCount = wordTrainer.getCorrectCount();
                 int falseCount = wordTrainer.getFalseCount();
+                if (wordTrainer.getList() == null || wordTrainer.getList().isEmpty()) {
+                    resultLabel.setText("Keine Wörter verfügbar.");
+                    return;
+                }else{
+                    correctDescription = wordTrainer.getList().get(correctCount).getWord(); // Angenommene Methode für die richtige Beschreibung
 
-                String correctDescription = wordTrainer.getList().get(correctCount).getWord(); // Angenommene Methode für die richtige Beschreibung
+                }
 
                 /**
                  * Überprüfung des INhalts des Textfeldes
@@ -134,6 +141,7 @@ public class Gui extends JFrame {
             int correctCount = wordTrainer.getCorrectCount();
 
             URL url = new URL(wordTrainer.getList().get(correctCount).getUrl());
+
 
             Image image = ImageIO.read(url);
             imageLabel = new JLabel(new ImageIcon(image));

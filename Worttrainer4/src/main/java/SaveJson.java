@@ -10,7 +10,7 @@ public class SaveJson implements PersistanceStrategy{
      * @param wordTrainer
      */
     @Override
-    public void save(WordTrainer wordTrainer) {
+    public boolean save(WordTrainer wordTrainer) {
         // Speichern als JSON
         Gson gson = new Gson();
 
@@ -18,10 +18,12 @@ public class SaveJson implements PersistanceStrategy{
         System.out.println(json);
         try(FileWriter file = new FileWriter("file.json")) {
             file.write(json);
+            return true;
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
     /**
      * Lädt den WordTrainer aus dem Json ffile

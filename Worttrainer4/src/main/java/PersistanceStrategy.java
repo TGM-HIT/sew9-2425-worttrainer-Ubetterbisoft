@@ -1,4 +1,4 @@
 public interface PersistanceStrategy {
-    void save(WordTrainer wordTrainer);
+    boolean save(WordTrainer wordTrainer);
     WordTrainer load();
 }

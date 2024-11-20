@@ -5,10 +5,10 @@ class Main{
     +main(String[]args):void
 }
 class WordTrainer {
-    -<linkedList>WordPair:
-    -correctCount
-    -attempts
-    -falseCount
+    -list: LinkedList<WordPair>
+    -correctCount: int
+    -attempts: int
+    -falseCount: int
 
     + setCorrectCount(): void
         + setFalseCount(): void
@@ -53,9 +53,9 @@ file file{
 
 }
 
-WordTrainer o-- WordPair: uses 1..*
+WordTrainer o--> WordPair: 1..*
 Gui --> WordTrainer
-Gui o--> PersistanceStrategy
+Gui --> PersistanceStrategy: 1..1
 SaveJson <--> file:1..1
 Main --> Gui: 1
 SaveJson ..|> PersistanceStrategy
